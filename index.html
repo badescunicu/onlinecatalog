@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/first-main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -22,13 +23,49 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        
+        <header>
+        	<a href="/" class="logo"></a>
+			<ul class="menu">
+					<li><a href="#">Camp1</a></li>
+					<li><a href="#">Camp2</a></li>
+					<li><a href="#">Camp3</a>
+						<ul>
+							<li><a href="#">Camp3-1</a></li>
+							<li><a href="#">Camp3-2</a></li>
+							<li><a href="#">Camp3-3</a></li>
+							<li><a href="#">Camp3-4</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Camp4</a></li>
+					<li><a href="#">Camp5</a></li>
+			</ul>
+		</header>
 
+		<div class="content-holder clearfix">
+			<div class="colon-left">
+				<H3>Bine ati venit</H3>
+				<H3>Va rugam sa va autentificati</H3>
+				<form >
+					<label>Your username:</label>
+					<input type="text"/>
+					<br/>
+					<label>Your password:</label>
+					<input type="password"/>
+					<br/>
+					<input type="submit"/>
+				</form>
+			</div>
+			<div class="colon-right">
+			</div>
+		</div>
+		
+		<!--
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-
+-->
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
