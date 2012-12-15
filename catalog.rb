@@ -46,7 +46,8 @@ end
 before do
   session[:first_time_visitor] ||= true
   @user_is_signed_in = session[:signed_in_user_id] != 0
-  if session[:signed_in_user_id] !=0 
+  session[:signed_in_user_id] ||= 0
+  if session[:signed_in_user_id] != 0 
     @@signedin_login = User.find_by_id(session[:signed_in_user_id]).login 
   end
   if session[:first_time_visitor]
