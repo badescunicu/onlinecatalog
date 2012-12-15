@@ -1,4 +1,4 @@
 onlinecatalog
 =============
 
-Online catalogue
+Online catalog
