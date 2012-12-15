@@ -1,0 +1,30 @@
+  <% if @display_login_failed_message %>
+    <div> Combination of username and password is incorrect! </div>
+  <% end %>
+  
+  <% if @display_welcome_message %>
+    <div> Welcome to my site! </div>
+    <div>
+      <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  <% end %>
+
+  <% if @display_login_form %>  
+    <div class="content-holder clearfix">
+			<div class="colon-left">
+				<H3>Bine ati venit</H3>
+				<H3>Va rugam sa va autentificati</H3>
+				<form action="/login" method="post">
+					<label>Your username:</label>
+					<input name="login" type="text"/ >
+					<br/>
+					<label>Your password:</label>
+					<input name="password" type="password"/>
+					<br/>
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
+  <% end %>
