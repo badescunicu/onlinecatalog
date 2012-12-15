@@ -29,6 +29,20 @@ class SchoolClass < ActiveRecord::Base
   belongs_to :teacher
 end
 
+class Grade < ActiveRecord::Base
+  belongs_to :student
+  belongs_to :subject
+end
+
+class Teachership < ActiveRecord::Base
+  belongs_to :teacher
+  belongs_to :school_class
+end
+
+class AugmentedSchoolClass < ActiveRecord::Base
+end
+
+
 before do
   session[:first_time_visitor] ||= true
   if session[:first_time_visitor]

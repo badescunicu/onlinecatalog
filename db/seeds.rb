@@ -9,6 +9,17 @@ users.each do |u|
   User.create(u)
 end
 
+subjects = [
+  {:subject_name => "English"},
+  {:subject_name => "Math"},
+  {:subject_name => "Geography"},
+  {:subject_name => "History"}
+]
+
+subjects.each do |s|
+  Subject.create(s)
+end
+
 u = User.find_by_login('teacher')
 t = Teacher.new
 t.user = u
@@ -17,4 +28,11 @@ t.save
 SchoolClass.create({:teacher => t, :name => '10B'})
  
 Student.create({:school_class => SchoolClass.find_by_name('10B'), :user => User.find_by_login('vlad'), :fullname => "Barbu Vlad"})
+
+Grade.create({:student => Student.find_by_fullname("vlad"), :subject => Subject.find_by_subject_name("English"), :value => 10, :type => 1})
+Grade.create({:student => Student.find_by_fullname("vlad"), :subject => Subject.find_by_subject_name("Math"), :value => 10, :type => 1})
+Grade.create({:student => Student.find_by_fullname("vlad"), :subject => Subject.find_by_subject_name("History"), :value => 10, :type => 2})
+
+
+
 
