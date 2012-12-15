@@ -17,11 +17,13 @@ body{
 <div class = "navbar-inner">
 <div class = "container">
 <a href = "/" class = "ahref"><span class = "brand" style="color: white;">OnlineCatalog</span></a>
+<% if @user_is_signed_in %>
 <div>
 <ul class="nav pull-right">
-<li a href="/signinform" class="ahref">Currently signed in as <%= @signed_in_user_name %>. Sign in as someone else</a></li>
+<li><a href="/logout" class="ahref">Currently signed in as <%= @@signedin_login %>. Log out</a></li>
 </ul>
 </div>
+<% end %>
 </div>
 </div>
 </div>

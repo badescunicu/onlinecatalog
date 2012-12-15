@@ -45,6 +45,10 @@ end
 
 before do
   session[:first_time_visitor] ||= true
+  @user_is_signed_in = session[:signed_in_user_id] != 0
+  if session[:signed_in_user_id] !=0 
+    @@signedin_login = User.find_by_id(session[:signed_in_user_id]).login 
+  end
   if session[:first_time_visitor]
     session[:signed_in_user_id] ||= 0
     @@combination_of_login_and_password_is_correct ||= false 
@@ -90,10 +94,9 @@ post "/login" do
   redirect "/" 
 end
 
-post "/logout" do
+get "/logout" do
   session[:first_time_visitor] = true
   session[:signed_in_user_id] = 0
   @@combination_of_login_and_password_is_correct = false
-
   redirect "/"
 end
