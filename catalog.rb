@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 end
 
 class Student < ActiveRecord::Base
-  belongs_to :class
+  belongs_to :school_class
   belongs_to :user
 end
 

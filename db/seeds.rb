@@ -16,5 +16,5 @@ t.save
 
 SchoolClass.create({:teacher => t, :name => '10B'})
  
-Student.create({:class => SchoolClass.find_by_name('10B'), :user => User.find_by_login('vlad'), :fullname => "Barbu Vlad"})
+Student.create({:school_class => SchoolClass.find_by_name('10B'), :user => User.find_by_login('vlad'), :fullname => "Barbu Vlad"})
 
