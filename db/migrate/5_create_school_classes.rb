@@ -4,5 +4,7 @@ class CreateSchoolClasses < ActiveRecord::Migration
       t.references :teacher
       t.string :name
     end
+    add_index :school_classes, :teacher_id
+    add_index :school_classes, :name
   end
 end

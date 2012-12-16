@@ -20,7 +20,7 @@ body{
 <% if @user_is_signed_in %>
 <div>
 <ul class="nav pull-right">
-<li><a href="/logout" class="ahref">Currently signed in as <%= @@signedin_login %>. Log out</a></li>
+<li><a href="/logout" class="ahref">Currently signed in as <%= @signed_in_fullname %>. Log out</a></li>
 </ul>
 </div>
 <% end %>

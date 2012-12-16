@@ -1,0 +1,15 @@
+<table class="table table-striped">
+  <tr>
+      <th>Subject</th>
+      <th>Grade</th>
+      <th>Grade Type</th>
+  </tr>
+  <% @grades.each do |g| %>
+  <tr>
+      <td><%= g.subject_name %></td>
+      <td><%= g.value %></td>
+      <td><%= g.grade_type %></td>
+  </tr>
+  <% end %>
+</table>
+

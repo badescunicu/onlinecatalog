@@ -4,5 +4,6 @@ class CreateTeachers < ActiveRecord::Migration
       t.references :user
 
     end
+    add_index :teachers, :user_id, :unique => true   
   end
 end

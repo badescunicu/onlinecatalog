@@ -3,7 +3,8 @@ class CreateStudents < ActiveRecord::Migration
     create_table :students do |t|
       t.references :school_class
       t.references :user
-      t.string :fullname
     end
+    add_index :students, :school_class_id
+    add_index :students, :user_id, :unique => true
   end
 end

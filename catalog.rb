@@ -37,9 +37,10 @@ end
 class Teachership < ActiveRecord::Base
   belongs_to :teacher
   belongs_to :school_class
+  belongs_to :subject
 end
 
-class AugmentedSchoolClass < ActiveRecord::Base
+class AugmentedGrade < ActiveRecord::Base
 end
 
 
@@ -48,8 +49,11 @@ before do
   @user_is_signed_in = session[:signed_in_user_id] != 0
   session[:signed_in_user_id] ||= 0
   if session[:signed_in_user_id] != 0 
-    @@signedin_login = User.find_by_id(session[:signed_in_user_id]).login 
-  end
+    user_record = User.find_by_id(session[:signed_in_user_id])
+    puts user_record
+    @signed_in_fullname = user_record.fullname 
+    @signed_in_user_type = user_record.user_type  
+   end
   if session[:first_time_visitor]
     session[:signed_in_user_id] ||= 0
     @@combination_of_login_and_password_is_correct ||= false 
@@ -61,17 +65,22 @@ get "/" do
   @display_login_form = false
   @display_login_failed_message = false
 
-  if @@combination_of_login_and_password_is_correct
+  if @@combination_of_login_and_password_is_correct 
     @display_welcome_message = true
-    puts "ramura1"
-  elsif session[:first_time_visitor]
+  elsif session[:first_time_visitor] 
       @display_login_form = true
-      puts "ramura2"
     else
       @display_login_failed_message = true
-      puts "ramura3"
   end
-
+  
+  if session[:signed_in_user_id] != 0
+    if @signed_in_user_type == 'S'
+      redirect '/s'
+    end
+    if @signed_in_user_type == 'T'
+      redirect '/t'
+    end
+  end
   erb :index
 end
 
@@ -94,6 +103,20 @@ post "/login" do
   end 
   redirect "/" 
 end
+
+get "/t" do
+  @teacher = Teacher.find_by_user_id(session[:signed_in_user_id])  
+  erb :t
+end
+
+get "/s" do
+  
+  student = Student.find_by_user_id(session[:signed_in_user_id])  
+  @grades = AugmentedGrade.find_all_by_student_id(student.id)
+  
+  erb :s
+end
+
 
 get "/logout" do
   session[:first_time_visitor] = true
