@@ -5,3 +5,5 @@
 ```
 rake db:migrate && rake db:seed && rackup
 ```
+
+Then visit http://localhost:9292/
