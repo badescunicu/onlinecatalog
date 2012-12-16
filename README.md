@@ -6,4 +6,4 @@
 rake db:migrate && rake db:seed && rackup
 ```
 
-Then visit http://localhost:9292/
+Then visit [http://localhost:9292/](http://localhost:9292/)
