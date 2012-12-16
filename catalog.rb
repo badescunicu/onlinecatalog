@@ -8,6 +8,7 @@ configure do
   options = { :adapter  => "sqlite3", :database => "dev.db" }
   ActiveRecord::Base.establish_connection(options)
   ActiveRecord::Base.logger = Logger.new(STDERR)
+  @@grade_type_descriptions = {1 => "R", 2 => "FE"}
 end
 
 class User < ActiveRecord::Base
@@ -47,16 +48,12 @@ end
 class AugmentedTeachership < ActiveRecord::Base
 end 
 
-class AugmentedStudentsGrades < ActiveRecord::Base
-end 
-
 before do
   session[:first_time_visitor] ||= true
   @user_is_signed_in = session[:signed_in_user_id] != 0
   session[:signed_in_user_id] ||= 0
   if session[:signed_in_user_id] != 0 
     user_record = User.find_by_id(session[:signed_in_user_id])
-    puts user_record
     @signed_in_fullname = user_record.fullname 
     @signed_in_user_type = user_record.user_type  
    end
@@ -100,7 +97,6 @@ post "/login" do
     user_password = BCrypt::Password.new(user_record.passwordhash)
     if user_password == password
       session[:signed_in_user_id] = user_record.id        
-      puts "success"
     else
       @@combination_of_login_and_password_is_correct = false
     end
@@ -117,19 +113,30 @@ get "/t" do
 end
 
 get "/s" do
-  
   student = Student.find_by_user_id(session[:signed_in_user_id])  
   @grades = AugmentedGrade.find_all_by_student_id(student.id)
-  
   erb :s
 end
 
 get "/school_class/:sc_id/subject/:subj_id" do
   sc_id = params[:sc_id].to_i
   subj_id = params[:subj_id].to_i
+  @subj_name = Subject.find_by_id(subj_id).subject_name
   school_class = SchoolClass.find_by_id(sc_id)
-/  @student_grades = AugmentedStudentsGrades.find_all_by_subj_id(subj_id)
-/
+  students = school_class.students
+  @stud_grades = []
+  students.each do |st|
+    stud_record = {}
+    stud_record[:fullname] = st.user.fullname
+    stud_grades = []
+    all_grades = Grade.where({:student_id => st.id, :subject_id => subj_id})
+    all_grades.each do |g|
+      stud_grades << g.value.to_s + "(" + @@grade_type_descriptions[g.grade_type] + ")"
+    end
+    stud_record[:string_representation_of_grades] = stud_grades.join(", ")
+    @stud_grades << stud_record
+  end
+
   erb :view_grades
 end
 

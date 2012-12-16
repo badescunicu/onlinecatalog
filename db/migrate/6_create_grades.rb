@@ -9,6 +9,5 @@ class CreateGrades < ActiveRecord::Migration
     end
     add_index :grades, :subject_id
     add_index :grades, :student_id
-    add_index :grades , [:subject_id, :student_id], :unique => true
   end
 end

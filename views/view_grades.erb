@@ -1,0 +1,13 @@
+<h3><%= @subj_name %></h3>
+<table class="table table-striped">
+	<tr>
+		<th>Student Name</th>
+		<th>Grade(type)</th>
+	</tr>
+<% @stud_grades.each do |stg| %>
+	<tr>
+		<td><%= stg[:fullname] %></td>
+		<td><%= stg[:string_representation_of_grades] %></td>
+	</tr>
+<% end %>
+</table>

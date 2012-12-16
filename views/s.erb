@@ -8,7 +8,7 @@
   <tr>
       <td><%= g.subject_name %></td>
       <td><%= g.value %></td>
-      <td><%= g.grade_type %></td>
+      <td><%= @@grade_type_descriptions[g.grade_type] %></td>
   </tr>
   <% end %>
 </table>
