@@ -1,4 +1,7 @@
-onlinecatalog
-=============
+## This is an online catalog application for schools
 
-Online catalog
+### Installation instructions:
+
+```
+rake db:migrate && rake db:seed && rackup
+```
