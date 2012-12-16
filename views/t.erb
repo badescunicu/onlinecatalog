@@ -1,0 +1,5 @@
+<% @teacherships.each do |t| %>
+<div>
+  <a href="/school_class/<%= t.school_class_id %>/subject/<%= t.subject_id %>"><%= t.name %> - <%=t.subject_name %></a>
+</div>
+<% end %>

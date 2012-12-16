@@ -27,6 +27,7 @@ end
 
 class SchoolClass < ActiveRecord::Base
   belongs_to :teacher
+  has_many :students
 end
 
 class Grade < ActiveRecord::Base
@@ -43,6 +44,11 @@ end
 class AugmentedGrade < ActiveRecord::Base
 end
 
+class AugmentedTeachership < ActiveRecord::Base
+end 
+
+class AugmentedStudentsGrades < ActiveRecord::Base
+end 
 
 before do
   session[:first_time_visitor] ||= true
@@ -105,7 +111,8 @@ post "/login" do
 end
 
 get "/t" do
-  @teacher = Teacher.find_by_user_id(session[:signed_in_user_id])  
+  teacher = Teacher.find_by_user_id(session[:signed_in_user_id])  
+  @teacherships = AugmentedTeachership.find_all_by_teacher_id(teacher.id)
   erb :t
 end
 
@@ -117,6 +124,14 @@ get "/s" do
   erb :s
 end
 
+get "/school_class/:sc_id/subject/:subj_id" do
+  sc_id = params[:sc_id].to_i
+  subj_id = params[:subj_id].to_i
+  school_class = SchoolClass.find_by_id(sc_id)
+/  @student_grades = AugmentedStudentsGrades.find_all_by_subj_id(subj_id)
+/
+  erb :view_grades
+end
 
 get "/logout" do
   session[:first_time_visitor] = true
